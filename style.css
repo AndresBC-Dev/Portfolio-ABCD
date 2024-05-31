@@ -1,0 +1,293 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+:root{
+    --background-color-day: #ddd;
+    --background-color-night: #5a189a;
+}
+
+[data-theme="day"]{
+    background-color: var(--background-color-day);
+}
+[data-theme="night"]{
+    background-color: var(--background-color-night);
+}
+/* Estilos generales */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: "Poppins", sans-serif;
+    padding: 20px;
+    background-color: var(--background-color-night);
+    color: aliceblue;
+    font-size: 1rem;
+    min-height: 100vh;
+}
+
+.container > * {
+    box-shadow: 10px 6px 37px -13 rgba(51, 51, 51, 0.74);
+    border-radius: 30px;
+    padding: 10px;
+    text-align: center;
+    font-weight: 500;
+    background-color: #ff9e00;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    overflow: hidden;
+}
+
+.container {
+    display: grid;
+    padding-top: 20px;
+    gap: 10px;
+    grid-template-areas:
+    "header header header"
+    "lang-container theme-container edad-container"
+    "linkedin-container projects-container projects-container";
+    grid-template-columns: auto auto auto;
+    grid-template-rows: 80vw 30vw 30vw;
+    opacity: 0;
+    transform: translateY(-100vh);
+    animation: slideInTop 1s ease-in-out forwards;
+    animation-delay: 0.3s;
+}
+
+@keyframes slideInTop {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.header {
+    grid-area: header;
+    position: relative;
+    cursor: grab;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 16px;
+    text-align: left;
+}
+
+.about-container {
+    width: 100%;
+}
+
+.header h2 {
+    display: flex;
+    font-size: clamp(1.5rem, 2.5vw, 2rem);
+    margin-bottom: 10px;
+}
+
+.header p {
+    font-size: clamp(1rem, 2vw, 1.5rem);
+}
+
+.lang-container {
+    grid-area: lang-container;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    cursor: pointer;
+    font-size: clamp(1rem, 2.5vw, 1.5rem);
+    font-weight: 700;
+    line-height: 2.2rem;
+}
+
+.lang-container p.active-lang {
+    font-weight: bold;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+}
+
+.lang-container p:not(.active-lang) {
+    opacity: 0.8;
+}
+
+.bottom-langs {
+    display: flex;
+    justify-content: space-between;
+    gap: 0.5rem;
+}
+
+.theme-container {
+    grid-area: theme-container;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.button {
+    background-color: #d2d2d2;
+    width: 10vw;
+    height: 5vw;
+    max-width: 200px;
+    max-height: 100px;
+    border-radius: 200px;
+    cursor: pointer;
+    position: relative;
+    transition: 0.2s;
+}
+
+.button::before {
+    display: flex;
+    position: absolute;
+    content: '';
+    background-color: #fff;
+    width: 4vw;
+    height: 4vw;
+    max-width: 90px;
+    max-height: 90px;
+    border-radius: 200px;
+    margin: 0.5vw;
+    transition: 0.2s;
+}
+
+input:checked + .button {
+    background-color: #20096d;
+}
+
+input:checked + .button::before {
+    transform: translateX(120%);
+}
+
+input {
+    display: none;
+}
+
+.edad-container {
+    grid-area: edad-container;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.edad-container p:nth-child(2) {
+    font-size: clamp(1.5rem, 3vw, 2.5rem);
+    font-weight: 700;
+    margin: 0;
+    line-height: 1.7rem;
+}
+
+.linkedin-container {
+    grid-area: linkedin-container;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: clamp(2rem, 5vw, 3rem);
+}
+
+.projects-container {
+    grid-area: projects-container;
+    text-align: left;
+    padding-left: 20px;
+}
+
+.projects-container p:nth-child(1) {
+    font-weight: 700;
+    font-size: clamp(1rem, 2.5vw, 1.5rem);
+}
+
+.projects-container p:nth-child(2) {
+    font-size: clamp(0.7rem, 2vw, 1rem);
+}
+
+/* Media query para tablets */
+@media screen and (min-width: 640px) {
+    .container {
+        grid-template-areas: 
+        "header header header lang-container"
+        "header header header theme-container"
+        "edad-container linkedin-container projects-container projects-container";
+        grid-template-columns: auto auto 20vw;
+        grid-template-rows: 20vw 20vw 20vw;
+    }
+    .header {
+        padding: 25px;
+        justify-content: flex-start;  
+    }
+    .about-container {
+        width: 65%;
+    }
+    .header h2 {
+        font-size: clamp(1.2rem, 2vw, 1.5rem);
+    }
+    .header p {
+        font-size: clamp(0.9rem, 1.5vw, 1.2rem);
+    }
+
+    .projects-container {
+        padding-top: 30px;
+    }
+}
+
+/* Media query para resoluciones más grandes */
+@media screen and (min-width: 790px) {
+    .container {
+        grid-template-areas: 
+        "header header header lang-container"
+        "header header header theme-container"
+        "edad-container linkedin-container projects-container projects-container";
+        grid-template-columns: auto auto 20vw;
+        grid-template-rows: 20vw 20vw 20vw;
+    }
+    .header {
+        padding: 40px;
+        justify-content: flex-start;  
+    }
+    .about-container {
+        width: 60%;
+    }
+    .header h2 {
+        font-size: clamp(1.4rem, 2.5vw, 2rem);
+    }
+    .header p {
+        font-size: clamp(1rem, 2vw, 1.5rem);
+    }
+
+    .projects-container {
+        padding-top: 30px;
+    }
+}
+
+@media screen and (min-width: 1001px) {
+    body {
+        margin-top: 20px;
+    }
+    .container {
+        grid-template-areas: 
+            "header header header lang-container"
+            "header header header theme-container"
+            "edad-container linkedin-container projects-container projects-container";
+        grid-template-columns: auto auto auto 20vw;
+        grid-template-rows: 20vw 20vw 20vw;
+        margin-left: 13%;
+        margin-right: 12%;
+    }
+
+    .header {
+        text-align: left;
+        margin-left: 0;
+    }
+    .about-container {
+        margin-top: 30%;
+        width: 65%;
+    }
+    .header h2 {
+        font-weight: 700;
+        padding-top: 5%;
+        font-size: clamp(1.7rem, 3vw, 2.5rem);
+    }
+    .header p {
+        font-size: clamp(1rem, 2vw, 1.5rem);
+        margin-top: 0;
+    }
+}
+
+
